@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name": "Firefox unhandledrejection bug",
+    "version": "0.0.0",
+    "permissions": ["<all_urls>"],
+    "background": {
+        "page": "bg.html",
+        "persistent": true
+    },
+    "content_scripts": [{
+        "matches": ["http://*/*", "https://*/*", "file://*/*"],
+        "js": ["content.js"]
+    }],
+    "applications": {
+        "gecko": {
+            "id": "test@firefox-unhandledrejection-bug"
+        }
+    }
+}

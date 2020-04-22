@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test unhandledrejection with extensions</title>
+    </head>
+    <body>
+        <button id="trigger-reject">Trigger unhandledrejection</button>
+        <div id="rejected-indicator"></div>
+        <script>
+(() => {
+    const triggerReject = () => {
+        new Promise((resolve, reject) => {
+            try {
+                somethingStupid;
+            } catch (e) {
+                reject(e);
+            }
+        });
+    };
+
+    const indicateRejected = (e) => {
+        document.querySelector('#rejected-indicator').textContent = `Received unhandledrejection: ${e.reason}`;
+    };
+
+    document.querySelector('#trigger-reject').addEventListener('click', triggerReject, false);
+    window.addEventListener('unhandledrejection', indicateRejected, false);
+})();
+        </script>
+    </body>
+</html>
